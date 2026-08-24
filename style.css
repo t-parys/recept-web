@@ -199,3 +199,43 @@ ol.steps li::before{
 @media (max-width: 420px){
   .card{ padding: 34px 22px 26px; }
 }
+.copy-btn{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: -8px 0 22px;
+  padding: 8px 14px;
+  border: 1.5px solid var(--mustard);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--accent-red-dark);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 11.5px;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.copy-btn:hover{ background: var(--mustard); color: var(--paper); }
+.copy-btn:active{ transform: translateY(1px); }
+.copy-btn:focus-visible{ outline: 2px solid var(--mustard); outline-offset: 3px; }
+.copy-full-btn{
+  display: block;
+  width: 100%;
+  margin: 24px 0 0;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 8px;
+  background: var(--bg-deep);
+  color: var(--paper);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 12.5px;
+  letter-spacing: 0.04em;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.copy-full-btn:hover{ background: var(--accent-red-dark); }
+.copy-full-btn:active{ transform: translateY(1px); }
+.copy-full-btn:focus-visible{ outline: 2px solid var(--mustard); outline-offset: 3px; }

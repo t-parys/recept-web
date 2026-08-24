@@ -897,3 +897,59 @@ document.getElementById("google-search").addEventListener("click", function () {
   window.open(`https://www.google.com/search?q=${query}`, "_blank");
 });
 
+document.getElementById("copy-ingredients").addEventListener("click", async () => {
+  const title = document.getElementById("recipe-title").textContent;
+  const items = Array.from(document.querySelectorAll("#recipe-ingredients li"))
+    .map(li => "- " + li.textContent.trim());
+  const text = title + "\nSuroviny:\n" + items.join("\n");
+
+  try {
+    await navigator.clipboard.writeText(text);
+  } catch (err) {
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand("copy");
+    document.body.removeChild(ta);
+  }
+
+  const btn = document.getElementById("copy-ingredients");
+  const original = btn.textContent;
+  btn.textContent = "✅ Zkopírováno";
+  setTimeout(() => { btn.textContent = original; }, 1500);
+});
+document.getElementById("copy-full-recipe").addEventListener("click", async () => {
+  const title = document.getElementById("recipe-title").textContent;
+  const time = document.getElementById("recipe-time").textContent;
+
+  const ingredients = Array.from(document.querySelectorAll("#recipe-ingredients li"))
+    .map(li => "- " + li.textContent.trim());
+
+  const steps = Array.from(document.querySelectorAll("#recipe-steps li"))
+    .map((li, index) => (index + 1) + ". " + li.textContent.trim());
+
+  const text = title + "\n" + time +
+    "\n\nSuroviny:\n" + ingredients.join("\n") +
+    "\n\nPostup:\n" + steps.join("\n");
+
+  try {
+    await navigator.clipboard.writeText(text);
+  } catch (err) {
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand("copy");
+    document.body.removeChild(ta);
+  }
+
+  const btn = document.getElementById("copy-full-recipe");
+  const original = btn.textContent;
+  btn.textContent = "✅ Zkopírováno";
+  setTimeout(() => { btn.textContent = original; }, 1500);
+});
