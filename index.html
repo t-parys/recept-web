@@ -2,30 +2,33 @@
 <html lang="cs">
 <head>
   <meta charset="UTF-8">
-  <title>Co mám dneska kurva uvařit</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Co dneska uvařit</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Co dneska uvařit?</h1>
 
-   <h2 id="recipe-title"></h2>
-  <p id="recipe-time"></p>
+  <button id="reroll" class="reroll" aria-label="Jiný recept">🔀 Jiný recept</button>
 
-  <h3>Suroviny</h3>
-  <ul id="recipe-ingredients"></ul>
+  <div class="scene">
+    <div class="stack-shadow s1"></div>
+    <div class="stack-shadow s2"></div>
+    <div class="card" id="card">
+      <div class="pin"></div>
+      <p class="eyebrow" id="eyebrow">Karta 1</p>
+      <h1 id="recipe-title">Název receptu</h1>
+      <p id="recipe-time">Doba přípravy: -- min</p>
 
-  <h3>Postup</h3>
-  <ol id="recipe-steps"></ol>
-    <button id="reroll">🔀 Jiný recept</button>
+      <hr class="divider">
 
+      <h2 class="label">Suroviny</h2>
+      <ul id="recipe-ingredients" class="ingredients"></ul>
 
+      <h2 class="label">Postup</h2>
+      <ol id="recipe-steps" class="steps"></ol>
+    </div>
+  </div>
 
-
-    
   <script src="script.js"></script>
-
-
-
-
 </body>
 </html>

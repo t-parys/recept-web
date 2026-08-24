@@ -1,23 +1,202 @@
-body {
-  font-family: Georgia, serif;
-  max-width: 600px;
-  margin: 40px auto;
-  padding: 0 20px;
-  background-color: #FBF6E9;
-  color: #2A2118;
+:root{
+  --bg-deep: #142B20;
+  --bg-deep-2: #1B3527;
+  --paper: #F6EFDD;
+  --paper-2: #EDE2C4;
+  --ink: #2A2118;
+  --muted: #8B8064;
+  --accent-red: #C4432A;
+  --accent-red-dark: #9E3220;
+  --mustard: #C98A1F;
+  --font-display: 'Georgia', 'Times New Roman', serif;
+  --font-mono: 'Menlo', 'Consolas', ui-monospace, monospace;
 }
 
-h1 {
-  color: #C4432A;
-  
+*{ box-sizing: border-box; }
+
+html, body{ margin: 0; min-height: 100vh; }
+
+body{
+  background:
+    repeating-linear-gradient(0deg, rgba(0,0,0,0.06) 0 1px, transparent 1px 64px),
+    repeating-linear-gradient(90deg, rgba(0,0,0,0.06) 0 1px, transparent 1px 64px),
+    var(--bg-deep-2);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 90px 20px 60px;
 }
 
-h2 {
-  font-size: 28px;
-  border-bottom: 2px solid #C98A1F;
-  padding-bottom: 8px;
+/* --- Fixní tlačítko, vždy na stejném místě --- */
+.reroll{
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 100;
+  padding: 13px 18px;
+  border: none;
+  border-radius: 999px;
+  background: var(--accent-red);
+  color: var(--paper);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  box-shadow: 0 5px 0 var(--accent-red-dark), 0 10px 20px rgba(0,0,0,0.4);
+  transition: transform 0.08s ease;
+}
+.reroll:hover{ filter: brightness(1.05); }
+.reroll:active{ transform: translateY(4px); box-shadow: 0 1px 0 var(--accent-red-dark); }
+.reroll:focus-visible{ outline: 2px solid var(--mustard); outline-offset: 3px; }
+
+@media (max-width: 480px){
+  .reroll{
+    top: 12px; left: 12px; right: 12px;
+    width: auto;
+    text-align: center;
+  }
+  body{ padding-top: 78px; }
 }
 
-ul, ol {
-  line-height: 1.8;
+/* --- Karta receptu --- */
+.scene{
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+}
+
+.stack-shadow{
+  position: absolute;
+  inset: 0;
+  border-radius: 4px;
+  background: var(--paper-2);
+}
+.stack-shadow.s1{ transform: rotate(3deg) translate(6px, 8px); opacity: 0.9; }
+.stack-shadow.s2{ transform: rotate(-2.5deg) translate(-8px, 10px); background: var(--mustard); opacity: 0.5; }
+
+.card{
+  position: relative;
+  background: var(--paper);
+  border-radius: 4px;
+  padding: 40px 32px 32px;
+  box-shadow: 0 24px 50px -12px rgba(0,0,0,0.55);
+  transform: rotate(-1.1deg);
+}
+
+.pin{
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #E8674A, var(--accent-red) 55%, var(--accent-red-dark) 100%);
+  box-shadow: 0 6px 10px rgba(0,0,0,0.45);
+}
+.pin::after{
+  content:"";
+  position: absolute;
+  top: 6px; left: 7px;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.65);
+}
+
+.eyebrow{
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin: 0 0 14px;
+}
+
+h1{
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(26px, 6vw, 32px);
+  line-height: 1.15;
+  margin: 0 0 10px;
+  color: var(--ink);
+}
+
+#recipe-time{
+  font-size: 12.5px;
+  color: var(--muted);
+  margin: 0 0 22px;
+}
+
+.divider{
+  border: none;
+  border-top: 1.5px dashed rgba(42,33,24,0.25);
+  margin: 22px 0;
+}
+
+h2.label{
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-red-dark);
+  margin: 0 0 12px;
+}
+
+ul.ingredients{
+  list-style: none;
+  padding: 0;
+  margin: 0 0 26px;
+  font-size: 13.5px;
+  line-height: 1.9;
+}
+ul.ingredients li{ padding-left: 20px; position: relative; }
+ul.ingredients li::before{
+  content:"";
+  position: absolute;
+  left: 0; top: 7px;
+  width: 9px; height: 9px;
+  border: 1.5px solid var(--mustard);
+  border-radius: 2px;
+}
+
+ol.steps{
+  padding-left: 0;
+  margin: 0;
+  list-style: none;
+  counter-reset: step;
+  font-size: 13.5px;
+  line-height: 1.7;
+}
+ol.steps li{
+  counter-increment: step;
+  padding-left: 30px;
+  position: relative;
+  margin-bottom: 12px;
+}
+ol.steps li::before{
+  content: counter(step);
+  position: absolute;
+  left: 0; top: -1px;
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: var(--bg-deep);
+  color: var(--paper);
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (prefers-reduced-motion: no-preference){
+  .card.deal{ animation: dealIn 0.42s cubic-bezier(.2,.8,.3,1); }
+}
+@keyframes dealIn{
+  from{ opacity: 0; transform: translateY(18px) rotate(2deg); }
+  to{ opacity: 1; transform: rotate(-1.1deg); }
+}
+
+@media (max-width: 420px){
+  .card{ padding: 34px 22px 26px; }
 }
