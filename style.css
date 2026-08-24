@@ -219,6 +219,7 @@ ol.steps li::before{
 .copy-btn:hover{ background: var(--mustard); color: var(--paper); }
 .copy-btn:active{ transform: translateY(1px); }
 .copy-btn:focus-visible{ outline: 2px solid var(--mustard); outline-offset: 3px; }
+
 .copy-full-btn{
   display: block;
   width: 100%;
