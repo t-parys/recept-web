@@ -891,4 +891,9 @@ function renderRandomRecipe() {
 renderRandomRecipe();
 
 document.getElementById("reroll").addEventListener("click", renderRandomRecipe);
+document.getElementById("google-search").addEventListener("click", function () {
+  const title = document.getElementById("recipe-title").textContent;
+  const query = encodeURIComponent(title + " recept");
+  window.open(`https://www.google.com/search?q=${query}`, "_blank");
+});
 

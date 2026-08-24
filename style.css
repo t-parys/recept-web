@@ -31,10 +31,9 @@ body{
 }
 
 /* --- Fixní tlačítko, vždy na stejném místě --- */
-.reroll{
+.reroll, .google-btn{
   position: fixed;
   top: 16px;
-  right: 16px;
   z-index: 100;
   padding: 13px 18px;
   border: none;
@@ -49,18 +48,18 @@ body{
   box-shadow: 0 5px 0 var(--accent-red-dark), 0 10px 20px rgba(0,0,0,0.4);
   transition: transform 0.08s ease;
 }
-.reroll:hover{ filter: brightness(1.05); }
-.reroll:active{ transform: translateY(4px); box-shadow: 0 1px 0 var(--accent-red-dark); }
-.reroll:focus-visible{ outline: 2px solid var(--mustard); outline-offset: 3px; }
+.reroll{ right: 16px; }
+.google-btn{ left: 16px; }
+
+.reroll:hover, .google-btn:hover{ filter: brightness(1.05); }
+.reroll:active, .google-btn:active{ transform: translateY(4px); box-shadow: 0 1px 0 var(--accent-red-dark); }
+.reroll:focus-visible, .google-btn:focus-visible{ outline: 2px solid var(--mustard); outline-offset: 3px; }
 
 @media (max-width: 480px){
-  .reroll{
-    top: 12px; left: 12px; right: 12px;
-    width: auto;
-    text-align: center;
-  }
+  .reroll, .google-btn{ padding: 10px 14px; font-size: 12px; }
   body{ padding-top: 78px; }
 }
+
 
 /* --- Karta receptu --- */
 .scene{
